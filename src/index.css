@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-bg-main: #FAF8F6; /* Premium warm white */
+  --color-bg-surface: #FFFFFF; /* Clean pure white card surface */
+  --color-bg-sidebar: #F5F1E9; /* Soft warm cream sidebar background */
+  --color-bg-input: #FFFFFF;
+  --color-bg-hover: rgba(28, 25, 23, 0.04);
+  
+  --color-txt-main: #1A1A18; /* Sophisticated deep dark charcoal */
+  --color-txt-muted: #5A5550; /* Muted warm grey */
+  --color-txt-dim: #908A83; /* Dimmed warm grey */
+  
+  --color-border-subtle: rgba(28, 25, 23, 0.08);
+  --color-border-focus: rgba(28, 25, 23, 0.35);
+  --color-border-hover: rgba(28, 25, 23, 0.18);
+  
+  --color-brand-dark: #1A1A18;
+  --color-brand-light: #F5F1E9;
+  
+  --animate-fade-in: fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-up: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-down: slide-down 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-down {
+  from { transform: translateY(-8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-main);
+    color: var(--color-txt-main);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Base interactive elements with smooth micro-animations */
+button, input, select, textarea, a {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom scrollbar styling for a premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-sidebar);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(28, 25, 23, 0.12);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(28, 25, 23, 0.25);
+}
