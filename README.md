@@ -20,8 +20,7 @@ Follow these steps to run the dashboard application locally on your machine:
    ```bash
    npm run dev
    ```
-4. Open your browser and go to `http://localhost:3001`.
-5. Enter your 4-digit passcode: **`4203`** to access the administration panel.
+
 
 ---
 
