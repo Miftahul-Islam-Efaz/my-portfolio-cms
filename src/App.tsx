@@ -91,7 +91,7 @@ export default function App() {
   const [connectionErrorMessage, setConnectionErrorMessage] = useState('');
 
   // Active view tab
-  const [activeTab, setActiveTab] = useState<'projects' | 'services' | 'video' | 'ai' | 'inbox' | 'ratings' | 'notes' | 'outcomes' | 'testimonials'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'services' | 'video' | 'ai' | 'inbox' | 'ratings' | 'notes' | 'outcomes' | 'testimonials' | 'footer'>('projects');
 
   // Loading & notification states
   const [loading, setLoading] = useState(false);
@@ -1403,7 +1403,8 @@ export default function App() {
             { id: 'ai', label: 'AI Profile', index: 'VI.' },
             { id: 'notes', label: 'Dev Notes', index: 'VII.' },
             { id: 'inbox', label: 'Inbox Messages', index: 'VIII.' },
-            { id: 'ratings', label: 'Vibe Check', index: 'IX.' }
+            { id: 'ratings', label: 'Vibe Check', index: 'IX.' },
+            { id: 'footer', label: 'Footer Showcase', index: 'X.' }
           ].map((item) => {
             const isActive = activeTab === item.id;
             return (
@@ -2454,6 +2455,135 @@ export default function App() {
                       No testimonials found in database. Create one to begin!
                     </div>
                   )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Footer Showcase Tab */}
+          {activeTab === 'footer' && (
+            <div className="animate-slide-up space-y-8">
+              <div className="border-b-4 border-double border-brand-dark pb-6">
+                <h2 className="font-serif italic text-4xl text-txt-main font-semibold tracking-tight">Footer Showcase</h2>
+                <p className="text-xs font-mono text-txt-muted uppercase tracking-widest mt-1.5">Manage the portrait card and background layout images inside the website footer</p>
+              </div>
+
+              {loading ? (
+                <div className="flex items-center justify-center py-20 text-txt-muted font-mono text-sm gap-3">
+                  <RefreshCw size={16} className="animate-spin" />
+                  Loading footer settings...
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  
+                  {/* Footer Portrait Card */}
+                  <div className="bg-bg-surface border border-brand-dark rounded-none p-6 flex flex-col justify-between hover:shadow-[4px_4px_0px_0px_rgba(26,26,24,1)] transition-all duration-300 relative group cursor-default">
+                    <div className="absolute top-0 left-0 right-0 h-[4px] bg-brand-dark" />
+                    
+                    <div className="mb-6 space-y-4">
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="text-xs font-mono text-txt-dim font-semibold uppercase tracking-wider">footer_portrait</span>
+                        <span className="px-2.5 py-1 bg-bg-sidebar border border-brand-dark font-mono text-xs text-txt-muted">Section: Footer</span>
+                      </div>
+                      
+                      <div>
+                        <h3 className="font-display font-black text-xl text-txt-main tracking-wide">
+                          Footer Portrait Image
+                        </h3>
+                        <p className="text-sm text-txt-muted mt-1">Updates the grayscale portrait photo card of Efaz shown in both desktop and mobile viewports</p>
+                      </div>
+
+                      {/* Image Preview */}
+                      <div className="aspect-square w-32 h-32 mx-auto rounded-none border border-brand-dark overflow-hidden bg-bg-main relative shadow-inner">
+                        {sectionBackgrounds.find(b => b.id === 'footer_portrait')?.image_url ? (
+                          <img 
+                            src={sectionBackgrounds.find(b => b.id === 'footer_portrait')?.image_url} 
+                            alt="Footer Portrait" 
+                            className="w-full h-full object-cover object-top" 
+                            referrerPolicy="no-referrer"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-xs text-txt-dim font-mono">No Image</div>
+                        )}
+                      </div>
+
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-txt-dim font-mono block">Image URL</span>
+                        <p className="text-xs font-mono text-txt-muted truncate bg-bg-main p-2 rounded-none border border-brand-dark">
+                          {sectionBackgrounds.find(b => b.id === 'footer_portrait')?.image_url || 'No URL configured'}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-brand-dark pt-4 mt-auto">
+                      <button
+                        onClick={() => {
+                          const bg = sectionBackgrounds.find(b => b.id === 'footer_portrait') || { id: 'footer_portrait', label: 'Footer Portrait Image', image_url: '' };
+                          setEditingSectionBg(bg);
+                          setIsSectionBgDrawerOpen(true);
+                        }}
+                        className="w-full flex items-center justify-center gap-2 bg-bg-sidebar hover:bg-brand-dark text-txt-main hover:text-brand-light py-2.5 rounded-none text-xs font-semibold font-mono border border-brand-dark cursor-pointer active:scale-98 transition-all uppercase tracking-wider"
+                      >
+                        <Edit size={14} />
+                        <span>Edit Portrait Image</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Footer Background Card */}
+                  <div className="bg-bg-surface border border-brand-dark rounded-none p-6 flex flex-col justify-between hover:shadow-[4px_4px_0px_0px_rgba(26,26,24,1)] transition-all duration-300 relative group cursor-default">
+                    <div className="absolute top-0 left-0 right-0 h-[4px] bg-brand-dark" />
+                    
+                    <div className="mb-6 space-y-4">
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="text-xs font-mono text-txt-dim font-semibold uppercase tracking-wider">footer_bg</span>
+                        <span className="px-2.5 py-1 bg-bg-sidebar border border-brand-dark font-mono text-xs text-txt-muted">Section: Footer</span>
+                      </div>
+                      
+                      <div>
+                        <h3 className="font-display font-black text-xl text-txt-main tracking-wide">
+                          Footer Section Background
+                        </h3>
+                        <p className="text-sm text-txt-muted mt-1">Updates the deep layout parallax background image displayed behind the name text in desktop viewports</p>
+                      </div>
+
+                      {/* Image Preview */}
+                      <div className="aspect-video w-full rounded-none border border-brand-dark overflow-hidden bg-bg-main relative shadow-inner">
+                        {sectionBackgrounds.find(b => b.id === 'footer_bg')?.image_url ? (
+                          <img 
+                            src={sectionBackgrounds.find(b => b.id === 'footer_bg')?.image_url} 
+                            alt="Footer Background" 
+                            className="w-full h-full object-cover" 
+                            referrerPolicy="no-referrer"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-xs text-txt-dim font-mono">No Image</div>
+                        )}
+                      </div>
+
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-txt-dim font-mono block">Image URL</span>
+                        <p className="text-xs font-mono text-txt-muted truncate bg-bg-main p-2 rounded-none border border-brand-dark">
+                          {sectionBackgrounds.find(b => b.id === 'footer_bg')?.image_url || 'No URL configured'}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-brand-dark pt-4 mt-auto">
+                      <button
+                        onClick={() => {
+                          const bg = sectionBackgrounds.find(b => b.id === 'footer_bg') || { id: 'footer_bg', label: 'Footer Section Background', image_url: '' };
+                          setEditingSectionBg(bg);
+                          setIsSectionBgDrawerOpen(true);
+                        }}
+                        className="w-full flex items-center justify-center gap-2 bg-bg-sidebar hover:bg-brand-dark text-txt-main hover:text-brand-light py-2.5 rounded-none text-xs font-semibold font-mono border border-brand-dark cursor-pointer active:scale-98 transition-all uppercase tracking-wider"
+                      >
+                        <Edit size={14} />
+                        <span>Edit Background Image</span>
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
               )}
             </div>
