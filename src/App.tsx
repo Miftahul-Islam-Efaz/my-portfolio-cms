@@ -1386,8 +1386,8 @@ export default function App() {
       {/* Body Container (Split Layout, height locked, scrolls internally) */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
         
-        {/* Sidebar Navigation (Strictly fixed left panel) */}
-        <aside className="w-full md:w-64 bg-bg-sidebar border-b md:border-b-0 md:border-r border-brand-dark py-8 flex flex-row md:flex-col gap-1 overflow-x-auto md:overflow-x-visible shrink-0 px-6">
+        {/* Sidebar Navigation (Strictly fixed left panel with vertical scroll) */}
+        <aside className="w-full md:w-64 bg-bg-sidebar border-b md:border-b-0 md:border-r border-brand-dark py-8 flex flex-row md:flex-col gap-1 overflow-x-auto md:overflow-y-auto md:overflow-x-hidden shrink-0 px-6">
           <div className="hidden md:block border-b-2 border-double border-brand-dark pb-3 mb-6">
             <p className="text-xs font-mono text-txt-main uppercase tracking-widest font-bold">
               Directory Index
