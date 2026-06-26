@@ -20,8 +20,12 @@ export async function authenticateWithPasscode(passcode: string) {
     throw new Error('Incorrect passcode. Access Denied.');
   }
 
-  const email = 'admin@miftahulislamefaz.xyz';
-  const password = 'miftahul_admin_password_4203';
+  const email = (import.meta as any).env.VITE_ADMIN_EMAIL;
+  const password = (import.meta as any).env.VITE_ADMIN_PASSWORD;
+
+  if (!email || !password) {
+    throw new Error('Admin credentials are not configured in environment variables (VITE_ADMIN_EMAIL / VITE_ADMIN_PASSWORD).');
+  }
 
   // 1. Try to log in
   const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
