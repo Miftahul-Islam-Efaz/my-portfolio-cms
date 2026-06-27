@@ -316,6 +316,18 @@ export default function App() {
           .order('id', { ascending: true });
         if (error) throw error;
         setOutcomesImages(data || []);
+      } else if (activeTab === 'footer') {
+        const { data, error } = await supabase
+          .from('section_backgrounds')
+          .select('*')
+          .in('id', ['footer_portrait', 'footer_bg']);
+        if (error) throw error;
+        if (data) {
+          setSectionBackgrounds(prev => {
+            const filtered = prev.filter(b => b.id !== 'footer_portrait' && b.id !== 'footer_bg');
+            return [...filtered, ...data];
+          });
+        }
       }
     } catch (err: any) {
       console.error('Data fetch error:', err);
